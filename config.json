@@ -1,0 +1,6 @@
+{
+    "Horizon" : 90.0,
+    "IP"      : "10.2.50.2",
+    "Logging" : "False",
+    "LogDir"  : "/home/pi/"
+}
