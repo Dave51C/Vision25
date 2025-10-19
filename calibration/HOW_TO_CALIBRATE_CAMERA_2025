@@ -15,13 +15,11 @@ PICK A RESOLUTION:
 	  /dev/video3
 	  /dev/media1
 
-  We're interested in the USB Camera entry, specifically the "/dev/vidoe2" line.
+  We're interested in the USB Camera entry, specifically the "/dev/video2" line.
 
   2) Run this command (note the use of "/dev/video2" from the above)
 
-  v4l2-ctl -d /dev/video2 --list-formats-ext |\
-  sed -n '/Size/{s/^.* //p}' |\
-  sort -k1,1n -u 
+  v4l2-ctl -d /dev/video2 --list-formats-ext | sed -n '/Size/{s/^.* //p}' | sort -k1,1n -u 
 
   You'll get a list that looks like this:
   160x120
