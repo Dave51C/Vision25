@@ -490,18 +490,14 @@ if __name__ == "__main__":
             Overlay = True
         else:
             Overlay = False
-        #for N in (RearTagCam, DriverCam, FrontTagCam):
-        if DSView in ('1','3'):
-            N = RearTagCam
-        else:
-            N = DriverCam
-        frame_time, input_img[N] = input_stream[N].grabFrame(imgBuf[N])
-        output_img[N]= np.copy(input_img[N])
-        gray = cv2.cvtColor (input_img[N], cv2.COLOR_BGR2GRAY)
-        results = detectors[N].detect(gray)
-        InFrame = Find_Apriltags (GameTags, output_img[N], results, CamMtx[N]['mtx'],CamMtx[N]['dist'],CamMtx[N]['FudgeOffset'],CamMtx[N]['FudgeFactor'],N)
-        All.update(InFrame)              # Merge with data 
-        TagsFound = TagsFound + results  # from other cameras
+        for N in (RearTagCam, DriverCam, FrontTagCam):
+            frame_time, input_img[N] = input_stream[N].grabFrame(imgBuf[N])
+            output_img[N]= np.copy(input_img[N])
+            gray = cv2.cvtColor (input_img[N], cv2.COLOR_BGR2GRAY)
+            results = detectors[N].detect(gray)
+            InFrame = Find_Apriltags (GameTags, output_img[N], results, CamMtx[N]['mtx'],CamMtx[N]['dist'],CamMtx[N]['FudgeOffset'],CamMtx[N]['FudgeFactor'],N)
+            All.update(InFrame)              # Merge with data 
+            TagsFound = TagsFound + results  # from other cameras
 
         # Determine the closest tag seen
         Closest = -1
